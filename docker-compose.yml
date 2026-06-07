@@ -1,0 +1,140 @@
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:8000"
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      AUTH_URL: http://auth-service:8001
+      PROJECT_URL: http://project-service:8002
+      TASK_URL: http://task-service:8003
+      NOTIFICATION_URL: http://notification-service:8004
+    depends_on:
+      auth-service:
+        condition: service_started
+      project-service:
+        condition: service_started
+      task-service:
+        condition: service_started
+      notification-service:
+        condition: service_started
+
+  auth-service:
+    build: ./services/auth-service
+    environment:
+      DATABASE_URL: postgresql://auth:auth@auth-db:5432/auth_db
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-in-production}
+      JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-1440}
+    depends_on:
+      auth-db:
+        condition: service_healthy
+
+  project-service:
+    build: ./services/project-service
+    environment:
+      DATABASE_URL: postgresql://project:project@project-db:5432/project_db
+      AUTH_URL: http://auth-service:8001
+      NOTIFICATION_URL: http://notification-service:8004
+    depends_on:
+      project-db:
+        condition: service_healthy
+      auth-service:
+        condition: service_started
+
+  task-service:
+    build: ./services/task-service
+    environment:
+      DATABASE_URL: postgresql://task:task@task-db:5432/task_db
+      PROJECT_URL: http://project-service:8002
+      NOTIFICATION_URL: http://notification-service:8004
+    depends_on:
+      task-db:
+        condition: service_healthy
+      project-service:
+        condition: service_started
+
+  notification-service:
+    build: ./services/notification-service
+    environment:
+      DATABASE_URL: postgresql://notif:notif@notification-db:5432/notification_db
+      PROJECT_URL: http://project-service:8002
+    depends_on:
+      notification-db:
+        condition: service_healthy
+      project-service:
+        condition: service_started
+
+  auth-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: auth
+      POSTGRES_PASSWORD: auth
+      POSTGRES_DB: auth_db
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auth -d auth_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  project-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: project
+      POSTGRES_PASSWORD: project
+      POSTGRES_DB: project_db
+    volumes:
+      - project_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U project -d project_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  task-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: task
+      POSTGRES_PASSWORD: task
+      POSTGRES_DB: task_db
+    volumes:
+      - task_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U task -d task_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  notification-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: notif
+      POSTGRES_PASSWORD: notif
+      POSTGRES_DB: notification_db
+    volumes:
+      - notification_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notif -d notification_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        BUILD_REVISION: ${BUILD_REVISION:-dev}
+    ports:
+      - "3000:80"
+    depends_on:
+      - gateway
+
+volumes:
+  auth_data:
+  project_data:
+  task_data:
+  notification_data:
