@@ -9,7 +9,7 @@
 ### Subir todo o sistema
 
 ```bash
-cd taskboard-mvp
+cd kanban-taskboard
 docker compose up --build
 ```
 
