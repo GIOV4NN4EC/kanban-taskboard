@@ -19,12 +19,6 @@ Acesse:
 - **API Gateway:** http://localhost:8000
 - **Swagger:** http://localhost:8001/docs (somente em rede interna)
 
-### Desenvolvimento local (sem Docker)
-
-1. Suba 4 instâncias PostgreSQL ou ajuste `DATABASE_URL` em cada serviço.
-2. Em terminais separados, rode cada serviço com `uvicorn` na porta indicada no `docker-compose.yml`.
-3. No frontend: `cd frontend && npm install && npm run dev`.
-
 ---
 
 ## Estrutura do repositório
