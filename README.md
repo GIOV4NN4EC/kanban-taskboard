@@ -6,6 +6,11 @@
 
 - Docker e Docker Compose
 
+### Clone o repositório
+```bash
+git clone 
+```
+
 ### Subir todo o sistema
 
 ```bash
