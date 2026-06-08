@@ -1,8 +1,6 @@
 # Sistema de Gerenciamento de Tarefas baseado em Kanban  
----  
-Ferramenta simples para organização de trabalho em projetos pessoais, acadêmicos ou profissionais, desenvolvida para a disciplina de Engenharia de Software.  
+##### Ferramenta simples baseada em microserviços para organização de trabalho em projetos pessoais, acadêmicos ou profissionais, desenvolvida para a disciplina de Engenharia de Software.  
 ---
-
 ## Como executar
 
 ### Pré-requisitos
