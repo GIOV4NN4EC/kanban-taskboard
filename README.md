@@ -10,7 +10,6 @@
 
 ```bash
 cd taskboard-mvp
-cp .env.example .env   # opcional — valores padrão funcionam em dev
 docker compose up --build
 ```
 
@@ -37,7 +36,6 @@ kanban-taskboard/
 │   ├── task-service/        # Tarefas e Kanban
 │   └── notification-service/# Histórico de atividades
 ├── frontend/                # SPA React + TypeScript
-├── .env.example             # Variáveis de ambiente
 └── docker-compose.yml       # Orquestração dos containers
 
 ## Arquitetura
