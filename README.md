@@ -1,5 +1,56 @@
 # Sistema de Gerenciamento de Tarefas baseado em Kanban
 ---  
+## Como executar
+
+### Pré-requisitos
+
+- Docker e Docker Compose
+
+### Subir todo o sistema
+
+```bash
+cd taskboard-mvp
+cp .env.example .env   # opcional — valores padrão funcionam em dev
+docker compose up --build
+```
+
+Acesse:
+
+- **Frontend:** http://localhost:3000
+- **API Gateway:** http://localhost:8000
+- **Swagger:** http://localhost:8001/docs (somente em rede interna)
+
+### Desenvolvimento local (sem Docker)
+
+1. Suba 4 instâncias PostgreSQL ou ajuste `DATABASE_URL` em cada serviço.
+2. Em terminais separados, rode cada serviço com `uvicorn` na porta indicada no `docker-compose.yml`.
+3. No frontend: `cd frontend && npm install && npm run dev`.
+
+---
+
+## Estrutura do repositório
+kanban-taskboard/
+├── gateway/                 # API Gateway
+├── services/
+│   ├── auth-service/        # Autenticação e usuários
+│   ├── project-service/     # Projetos e membros
+│   ├── task-service/        # Tarefas e Kanban
+│   └── notification-service/# Histórico de atividades
+├── frontend/                # SPA React + TypeScript
+├── .env.example             # Variáveis de ambiente
+└── docker-compose.yml       # Orquestração dos containers
+
+## Arquitetura
+
+| Serviço | Porta (interna) | Responsabilidade |
+|---------|-----------------|------------------|
+| `api-gateway` | 8000 | Roteamento, CORS, validação JWT |
+| `auth-service` | 8001 | Cadastro, login, perfil |
+| `project-service` | 8002 | Projetos e membros |
+| `task-service` | 8003 | Tarefas e Kanban |
+| `notification-service` | 8004 | Histórico de atividades |
+| `frontend` | 3000 → 80 | Interface web |
+
 ## Stack
 ### Backend
 - **Python 3.12**: Linguagem dos microserviços e gateway;
