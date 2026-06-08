@@ -21,9 +21,6 @@ docker compose up --build
 Acesse:
 
 - **Frontend:** http://localhost:3000
-- **API Gateway:** http://localhost:8000
-- **Swagger:** http://localhost:8001/docs (somente em rede interna)
-
 ---
 
 ## Estrutura do repositório
