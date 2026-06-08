@@ -8,7 +8,7 @@
 
 ### Clone o repositório
 ```bash
-git clone 
+git clone https://github.com/GIOV4NN4EC/kanban-taskboard.git
 ```
 
 ### Subir todo o sistema
