@@ -1,5 +1,8 @@
-# Sistema de Gerenciamento de Tarefas baseado em Kanban
+# Sistema de Gerenciamento de Tarefas baseado em Kanban  
 ---  
+Ferramenta simples para organização de trabalho em projetos pessoais, acadêmicos ou profissionais, desenvolvida para a disciplina de Engenharia de Software.  
+---
+
 ## Como executar
 
 ### Pré-requisitos
@@ -25,14 +28,14 @@ Acesse:
 
 ## Estrutura do repositório
 kanban-taskboard/  
-├── gateway/                 # API Gateway  
+├── gateway/-------# API Gateway  
 ├── services/  
-│   ├── auth-service/           # Autenticação e usuários  
-│   ├── project-service/        # Projetos e membros  
-│   ├── task-service/           # Tarefas e Kanban  
-│   └── notification-service/   # Histórico de atividades  
-├── frontend/                   # SPA React + TypeScript  
-└── docker-compose.yml          # Orquestração dos containers  
+│   ├── auth-service/------# Autenticação e usuários  
+│   ├── project-service/------# Projetos e membros  
+│   ├── task-service/------# Tarefas e Kanban  
+│   └── notification-service/------# Histórico de atividades  
+├── frontend/------# React + TypeScript  
+└── docker-compose.yml ------# Orquestração dos containers  
 
 ## Arquitetura
 
@@ -44,6 +47,25 @@ kanban-taskboard/
 | `task-service` | 8003 | Tarefas e Kanban |
 | `notification-service` | 8004 | Histórico de atividades |
 | `frontend` | 3000 → 80 | Interface web |
+
+## Estrutura das pastas de Microservices
+nome-do-serviço/  
+├── Dockerfile -------- # Imagem Docker do serviço  
+├── requirements.txt -------- # Dependências Python  
+├── app/  
+│   ├── main.py -------- # Ponto de entrada FastAPI  
+│   ├── config/  
+│   │   └── settings.py -------- # Variáveis de ambiente  
+│   ├── database/  
+│   │   ├── base.py -------- # Classe base do SQLAlchemy  
+│   │   └── session.py -------- # Conexão e sessão do banco  
+│   ├── models/ -------- # Tabelas (entidades)  
+│   ├── schemas/ -------- # Validação entrada/saída (Pydantic)  
+│   ├── repositories/ -------- # Acesso ao banco  
+│   ├── services/ -------- # Regras de negócio  
+│   ├── routes/ -------- # Endpoints HTTP  
+│   └── utils/ -------- # Utilitários e clientes HTTP  
+ ──
 
 ## Stack
 ### Backend
@@ -100,5 +122,26 @@ kanban-taskboard/
 - Controle de acesso: só membros podem ver e editar tarefas do projeto.
 
 ### Tarefas
+- Quadro Kanban (to do, doing, done);
+- Criar tarefa;
+- Editar tarefa;
+- Excluir tarefa;
+- Mover tarefa;
+- Prioridade da tarefa;
+- Prazo por tarefa;
+- Indicador de tarefa atrasada
+#### Filtros
+- Busca por texto
+- Filtro por status
+- Filtro por responsável
+- Filtro por prazo
+- Filtro “apenas atrasadas”
+- Limpar filtros
 
-  
+### Comentários nas tarefas
+- Listar comentários de uma tarefa
+- Criar comentário
+- Editar comentário (somente o autor)
+- Excluir comentário (autor ou dono do projeto)
+- Menções a membros (@nome) — só é possível mencionar quem faz parte do projeto
+- Painel lateral de comentários ao abrir uma tarefa
