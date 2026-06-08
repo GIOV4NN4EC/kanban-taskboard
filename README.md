@@ -22,15 +22,15 @@ Acesse:
 ---
 
 ## Estrutura do repositório
-kanban-taskboard/
-├── gateway/                 # API Gateway
-├── services/
-│   ├── auth-service/        # Autenticação e usuários
-│   ├── project-service/     # Projetos e membros
-│   ├── task-service/        # Tarefas e Kanban
-│   └── notification-service/# Histórico de atividades
-├── frontend/                # SPA React + TypeScript
-└── docker-compose.yml       # Orquestração dos containers
+kanban-taskboard/  
+├── gateway/                 # API Gateway  
+├── services/  
+│   ├── auth-service/           # Autenticação e usuários  
+│   ├── project-service/        # Projetos e membros  
+│   ├── task-service/           # Tarefas e Kanban  
+│   └── notification-service/   # Histórico de atividades  
+├── frontend/                   # SPA React + TypeScript  
+└── docker-compose.yml          # Orquestração dos containers  
 
 ## Arquitetura
 
