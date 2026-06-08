@@ -49,10 +49,6 @@ export default function AuthLayout({ title, children, footer }: AuthLayoutProps)
           )}
         </CardContent>
       </Card>
-
-      <Typography variant="body2" color="text.disabled" sx={{ position: "absolute", bottom: 24, right: 24 }} aria-hidden>
-        ✦
-      </Typography>
     </Box>
   );
 }
