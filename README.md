@@ -46,25 +46,6 @@ kanban-taskboard/
 | `notification-service` | 8004 | Histórico de atividades |
 | `frontend` | 3000 → 80 | Interface web |
 
-## Estrutura das pastas de Microservices
-nome-do-serviço/  
-├── Dockerfile -------- # Imagem Docker do serviço  
-├── requirements.txt -------- # Dependências Python  
-├── app/  
-│   ├── main.py -------- # Ponto de entrada FastAPI  
-│   ├── config/  
-│   │   └── settings.py -------- # Variáveis de ambiente  
-│   ├── database/  
-│   │   ├── base.py -------- # Classe base do SQLAlchemy  
-│   │   └── session.py -------- # Conexão e sessão do banco  
-│   ├── models/ -------- # Tabelas (entidades)  
-│   ├── schemas/ -------- # Validação entrada/saída (Pydantic)  
-│   ├── repositories/ -------- # Acesso ao banco  
-│   ├── services/ -------- # Regras de negócio  
-│   ├── routes/ -------- # Endpoints HTTP  
-│   └── utils/ -------- # Utilitários e clientes HTTP  
- ──
-
 ## Stack
 ### Backend
 - **Python 3.12**: Linguagem dos microserviços e gateway;
