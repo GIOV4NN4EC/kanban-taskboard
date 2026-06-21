@@ -18,22 +18,23 @@ git clone https://github.com/GIOV4NN4EC/kanban-taskboard.git
 cd kanban-taskboard
 docker compose up --build
 ```
-
-Acesse:
-
-- **Frontend:** http://localhost:3000
+**Acesse:**
+- **Frontend:** http://localhost:3000 (porta definida em `docker-compose.yml` → `3000:80`)
+- **API Gateway:** http://localhost:8000
+- **Swagger (ex.: auth):** http://localhost:8001/docs (somente em rede interna; use o gateway em produção)
+> A porta **3000** no host é configurada em `docker-compose.yml`. Dentro do container, o Nginx escuta na porta **80** (`frontend/nginx.conf`). Em desenvolvimento sem Docker, o Vite usa a porta **3000** (`frontend/vite.config.ts`).
 ---
 
 ## Estrutura do repositório
 kanban-taskboard/  
-├── gateway/-------# API Gateway  
+├── gateway/          # API Gateway  
 ├── services/  
-│   ├── auth-service/------# Autenticação e usuários  
-│   ├── project-service/------# Projetos e membros  
-│   ├── task-service/------# Tarefas e Kanban  
-│   └── notification-service/------# Histórico de atividades  
-├── frontend/------# React + TypeScript  
-└── docker-compose.yml ------# Orquestração dos containers  
+│   ├── auth-service/      # Autenticação e usuários  
+│   ├── project-service/      # Projetos e membros  
+│   ├── task-service/       # Tarefas e Kanban  
+│   └── notification-service/      # Histórico de atividades  
+├── frontend/      # React + TypeScript  
+└── docker-compose.yml       # Orquestração dos containers  
 
 ## Arquitetura
 
